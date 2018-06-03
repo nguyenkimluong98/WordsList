@@ -1,4 +1,5 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import { AppRegistry } from "react-native";
+import App from "./App";
+import Wheather from "./src2/Wheather";
 
-AppRegistry.registerComponent('WordsList', () => App);
+AppRegistry.registerComponent("WordsList", () => Wheather);
