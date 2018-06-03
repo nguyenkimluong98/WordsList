@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-nativ
 
 import { connect } from "react-redux";
 
+import { toggleIsAdding, addWord } from "../redux/actionCreator";
+import { bindActionCreators } from "redux";
+
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -15,14 +18,8 @@ class Form extends Component {
 
   onAdd() {
     const { en, vn } = this.state;
-    this.props.dispatch({
-      type: "ADD_WORD",
-      en,
-      vn
-    });
-    this.props.dispatch({
-      type: "TOGGLE_IS_ADDING"
-    });
+    this.props.addWord(en, vn);
+    this.props.toggleIsAdding();
   }
 
   render() {
@@ -50,7 +47,14 @@ class Form extends Component {
   }
 }
 
-export default connect()(Form);
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleIsAdding: bindActionCreators(toggleIsAdding, dispatch),
+    addWord: bindActionCreators(addWord, dispatch)
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Form);
 
 const styles = StyleSheet.create({
   container: {
